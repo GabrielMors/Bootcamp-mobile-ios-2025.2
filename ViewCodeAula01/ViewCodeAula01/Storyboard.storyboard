@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B3y-Uc-jsd">
+                                <rect key="frame" x="16" y="391.66666666666669" width="361" height="69"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2e-nI-TmC">
+                                        <rect key="frame" x="0.0" y="34" width="361" height="35"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tR3-I6-1Kn">
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstItem="tR3-I6-1Kn" firstAttribute="leading" secondItem="B3y-Uc-jsd" secondAttribute="leading" id="6fE-4J-wOG"/>
+                                    <constraint firstAttribute="bottom" secondItem="R2e-nI-TmC" secondAttribute="bottom" id="FtU-G0-Y7K"/>
+                                    <constraint firstAttribute="trailing" secondItem="tR3-I6-1Kn" secondAttribute="trailing" id="Lf6-gU-dcR"/>
+                                    <constraint firstItem="R2e-nI-TmC" firstAttribute="leading" secondItem="B3y-Uc-jsd" secondAttribute="leading" id="ac5-Dh-DmZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="R2e-nI-TmC" secondAttribute="trailing" id="gmO-y2-sMc"/>
+                                    <constraint firstItem="tR3-I6-1Kn" firstAttribute="top" secondItem="B3y-Uc-jsd" secondAttribute="top" id="yt9-dt-5qr"/>
+                                    <constraint firstItem="R2e-nI-TmC" firstAttribute="top" secondItem="tR3-I6-1Kn" secondAttribute="bottom" id="zt9-I8-cwD"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="B3y-Uc-jsd" secondAttribute="trailing" constant="16" id="7e2-ay-jMX"/>
+                            <constraint firstItem="B3y-Uc-jsd" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="nLJ-Tu-O9r"/>
+                            <constraint firstItem="B3y-Uc-jsd" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="wbb-XC-ln1"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="130.53435114503816" y="112.67605633802818"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
