@@ -11,7 +11,7 @@ import FirebaseAuth
 struct UserModel {
     let email: String
     
-    init(with firebaseUser: User) {
-        email = firebaseUser.email ?? ""
+    init(with firebaseUser: User?) {
+        email = firebaseUser?.email ?? ""
     }
 }

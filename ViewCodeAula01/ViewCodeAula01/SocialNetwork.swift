@@ -1,5 +1,5 @@
 //
-//  SocialNetworkApple.swift
+//  SocialNetwork.swift
 //  GeniusChefAI
 //
 //  Created by Vagner Oliveira on 20/09/25.
@@ -12,13 +12,25 @@ import FirebaseAuth
 
 fileprivate var currentNonce: String?
 
-final class SocialNetworkApple: NSObject, @unchecked Sendable {
+final class SocialNetwork: NSObject, @unchecked Sendable {
     
     var delegate: SocialNetworkAppleDelegate?
     
     required override init() { }
     
-    func login()  {
+    func loginEmailAndPassword(email: String, password: String) {
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            
+            guard let error else {
+                self.delegate?.onLoginSuccess(user: authResult?.user)
+                return
+            }
+            
+            self.delegate?.onLoginError(error)
+        }
+    }
+    
+    func loginApple()  {
         let nonce = randomNonceString()
         currentNonce = nonce
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -65,7 +77,7 @@ final class SocialNetworkApple: NSObject, @unchecked Sendable {
     
 }
 
-extension SocialNetworkApple: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+extension SocialNetwork: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return ASPresentationAnchor()

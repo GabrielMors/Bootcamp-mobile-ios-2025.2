@@ -6,26 +6,50 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class HomeViewController: UIViewController {
     
     var user: UserModel?
+    
+    private lazy var exitButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Sair", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(didTapExit), for: .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("Email: ", user?.email)
+        view.backgroundColor = .white
+        
+        view.addSubview(exitButton)
+        
+        NSLayoutConstraint.activate([
+            exitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            exitButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.hidesBackButton = true
     }
-    */
+    
+    @objc
+    func didTapExit() {
+        do {
+            try Auth.auth().signOut()
+            
+            let controller = LoginViewController()
+            
+            navigationController?.addFadeAnimationAndNavigateToRoot(root: controller)
+            
+        } catch {
+            print("Erro ao sair", error)
+        }
+    }
 
 }

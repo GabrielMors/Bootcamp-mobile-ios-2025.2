@@ -9,9 +9,11 @@ import UIKit
 import FirebaseAuth
 
 class LoginViewController: BaseAuthViewController {
-
+    
     var screen: LoginScreen?
-
+    
+    private let socialNetwork = SocialNetwork()
+    
     override func loadView() {
         super.loadView()
         screen = LoginScreen()
@@ -21,56 +23,30 @@ class LoginViewController: BaseAuthViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        socialNetwork.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         title = "Login"
+        navigationItem.hidesBackButton = true
     }
     
-    func navDestination(_ controller: UIViewController) {
-        navigationController?.pushViewController(controller, animated: true)
-    }
-
 }
 
 extension LoginViewController: LoginScreenDelegate {
     
     func didTapCreateAccount() {
-        navDestination(RegisterViewController())
+        navigationController?.pushViewController(RegisterViewController(), animated: true)
     }
     
     // Apple
     func didTapLogin() {
-        let socialNetworkApple = SocialNetworkApple()
-        socialNetworkApple.login()
+        socialNetwork.loginApple()
     }
     
     func didTapLogin(email: String, password: String) {
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-          guard let strongSelf = self else { return }
-          
-            guard error == nil else {
-                strongSelf.showAlert(title: "Erro", message: "Os dados não conferem")
-                return
-            }
-            
-            if let authResult {
-                
-                let homeViewController = HomeViewController()
-                
-                homeViewController.user = UserModel(with: authResult.user)
-                
-                strongSelf.navDestination(homeViewController)
-                
-                return
-            }
-            
-            strongSelf.showAlert(title: "Erro", message: "Erro desconhecido")
-            
-        }
-        
-        
+        socialNetwork.loginEmailAndPassword(email: email, password: password)
     }
     
     func showAlert(title: String, message: String) {
@@ -80,5 +56,27 @@ extension LoginViewController: LoginScreenDelegate {
         
         present(alert, animated: true)
     }
+}
+
+extension LoginViewController: SocialNetworkAppleDelegate {
+    
+    func onLoginError(_ error: any Error) {
+        print("Erro", error.localizedDescription)
+        showAlert(title: "Erro", message: "Erro \(error.localizedDescription)")
+    }
+    
+    func onLoginSuccess(user: FirebaseAuth.User?) {
+        
+        let homeViewController = HomeViewController()
+        
+        homeViewController.user = UserModel(with: user)
+        
+        navigationController?.setViewControllers([
+            homeViewController
+        ], animated: true)
+        
+        return
+    }
+    
 }
 
