@@ -8,16 +8,29 @@
 import UIKit
 import FirebaseAuth
 
+// HomeViewModel -> VM
+// Model -> M
+// View -> V
+
+
 class HomeViewController: UIViewController {
     
     var user: UserModel?
     
+    private var wrapper = WrapperModel<CarModel>()
+    
+    lazy var viewModel = HomeViewModel(wrapper: wrapper)
+    
     private lazy var exitButton: UIButton = {
+        
         let button = UIButton(type: .system)
+        
         button.setTitle("Sair", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(didTapExit), for: .touchUpInside)
+        
         return button
+        
     }()
 
     override func viewDidLoad() {
