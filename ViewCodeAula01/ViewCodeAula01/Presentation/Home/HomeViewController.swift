@@ -12,38 +12,22 @@ import FirebaseAuth
 // Model -> M
 // View -> V
 
-
 class HomeViewController: UIViewController {
     
-    var user: UserModel?
+    var viewModel = HomeViewModel()
     
-    private var wrapper = WrapperModel<CarModel>()
+    private var screen: HomeScreen?
     
-    lazy var viewModel = HomeViewModel(wrapper: wrapper)
+    override func loadView() {
+        screen = HomeScreen()
+        screen?.delegate = self
+        screen?.carModels = viewModel.models
+        view = screen
+    }
     
-    private lazy var exitButton: UIButton = {
-        
-        let button = UIButton(type: .system)
-        
-        button.setTitle("Sair", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(didTapExit), for: .touchUpInside)
-        
-        return button
-        
-    }()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
-        view.addSubview(exitButton)
-        
-        NSLayoutConstraint.activate([
-            exitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            exitButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,7 +35,10 @@ class HomeViewController: UIViewController {
         navigationItem.hidesBackButton = true
     }
     
-    @objc
+}
+
+extension HomeViewController: HomeScreenDelegate {
+    
     func didTapExit() {
         do {
             try Auth.auth().signOut()
@@ -64,5 +51,6 @@ class HomeViewController: UIViewController {
             print("Erro ao sair", error)
         }
     }
-
+    
 }
+

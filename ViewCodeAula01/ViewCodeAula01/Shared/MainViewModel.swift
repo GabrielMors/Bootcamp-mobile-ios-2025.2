@@ -1,5 +1,5 @@
 //
-//  ViewModel.swift
+//  MainViewModel.swift
 //  ViewCodeAula01
 //
 //  Created by Vagner Reis on 13/11/25.
@@ -7,8 +7,7 @@
 
 import Foundation
 
-protocol ViewModel {
+protocol MainViewModel {
     associatedtype Model: CustomModel
-    var wrapper: WrapperModel<Model> { get }
-    init(wrapper: WrapperModel<Model>)
+    var models: [Model] { get }
 }

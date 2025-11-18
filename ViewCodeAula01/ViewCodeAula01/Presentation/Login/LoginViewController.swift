@@ -69,7 +69,10 @@ extension LoginViewController: SocialNetworkAppleDelegate {
         
         let homeViewController = HomeViewController()
         
-        homeViewController.user = UserModel(with: user)
+        // Mapper
+        let userModel = UserModel(with: user)
+        
+        homeViewController.viewModel.setUserModel(userModel)
         
         navigationController?.setViewControllers([
             homeViewController

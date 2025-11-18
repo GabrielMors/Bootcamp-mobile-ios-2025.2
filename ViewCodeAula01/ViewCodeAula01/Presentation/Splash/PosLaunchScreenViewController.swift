@@ -55,10 +55,15 @@ class PosLaunchScreenViewController: UIViewController {
             if isAuth {
                 
                 let user = Auth.auth().currentUser
-                let controller = HomeViewController()
-                controller.user = UserModel(with: user)
+                let homeViewController = HomeViewController()
+               
+                let userModel = UserModel(with: user)
                 
-                self.navigationController?.addFadeAnimationAndNavigateToRoot(root: controller)
+                homeViewController
+                    .viewModel
+                    .setUserModel(userModel)
+                
+                self.navigationController?.addFadeAnimationAndNavigateToRoot(root: homeViewController)
                 
             } else {
                 self.navigationController?.addFadeAnimationAndNavigateToRoot(root: LoginViewController())

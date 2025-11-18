@@ -8,13 +8,6 @@
 import Foundation
 import UIKit
 
-protocol LoginScreenDelegate: AnyObject {
-    func didTapLogin(email: String, password: String)
-    func didTapLogin()
-    func showAlert(title: String, message: String)
-    func didTapCreateAccount()
-}
-
 class LoginScreen: UIView {
     
     weak var delegate: LoginScreenDelegate?
@@ -100,7 +93,7 @@ class LoginScreen: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        build()
+        addSubviews()
         configConstraints()
     }
     
@@ -128,7 +121,7 @@ class LoginScreen: UIView {
         delegate?.didTapLogin()
     }
     
-    private func build() {
+    private func addSubviews() {
         
         addSubview(logoImageView)
         
@@ -211,4 +204,11 @@ extension LoginScreen: UITextFieldDelegate {
         return true
         
     }
+}
+
+protocol LoginScreenDelegate: AnyObject {
+    func didTapLogin(email: String, password: String)
+    func didTapLogin()
+    func showAlert(title: String, message: String)
+    func didTapCreateAccount()
 }

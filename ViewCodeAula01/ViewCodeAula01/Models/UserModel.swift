@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseAuth
 
-struct UserModel {
+struct UserModel: CustomModel {
     let email: String
     
     init(with firebaseUser: User?) {

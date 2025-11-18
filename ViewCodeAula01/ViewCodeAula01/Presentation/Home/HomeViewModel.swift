@@ -7,15 +7,26 @@
 
 import Foundation
 
-class HomeViewModel: ViewModel {
+class HomeViewModel: MainViewModel {
     
-    typealias Model = CarModel
+    var models: [CarModel]
     
-    var wrapper: WrapperModel<Model>
+    private(set) var userModel: UserModel?
     
-    required init(wrapper: WrapperModel<Model>) {
-        self.wrapper = wrapper
+    init() {
+        
+        let models: [CarModel] = [
+            CarModel(year: 1998, name: "Chevete", imageURL: ""),
+            CarModel(year: 1993, name: "Opala", imageURL: "")
+        ]
+        
+        self.models = models
+        
     }
- 
+    
+    func setUserModel(_ model: UserModel) {
+        userModel = model
+    }
+
 }
 

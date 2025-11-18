@@ -50,7 +50,11 @@ extension RegisterViewController: RegisterScreenDelegate {
                 
                 let homeViewController = HomeViewController()
                 
-                homeViewController.user = UserModel(with: authResult.user)
+                let userModel = UserModel(with: authResult.user)
+                
+                homeViewController
+                    .viewModel
+                    .setUserModel(userModel)
                 
                 self.navDestination(homeViewController)
                 
