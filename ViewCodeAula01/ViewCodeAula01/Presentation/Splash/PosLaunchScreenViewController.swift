@@ -61,7 +61,7 @@ class PosLaunchScreenViewController: UIViewController {
                 
                 homeViewController
                     .viewModel
-                    .setUserModel(userModel)
+                    .setUser(userModel)
                 
                 self.navigationController?.addFadeAnimationAndNavigateToRoot(root: homeViewController)
                 

@@ -12,8 +12,6 @@ class HomeScreen: UIView {
     
     weak var delegate: HomeScreenDelegate?
     
-    var carModels: [CarModel] = []
-    
     // MARK: Properties
     // Atributos devem ficar antes do construtor
     private lazy var exitButton: UIButton = {
@@ -31,7 +29,7 @@ class HomeScreen: UIView {
         
         let tbView = UITableView()
         
-        tbView.register(HomeTableViewCell.nib, forCellReuseIdentifier: HomeTableViewCell.identifier)
+        tbView.register(HomeTableViewCell.self, forCellReuseIdentifier: HomeTableViewCell.identifier)
         
         return tbView
         
@@ -39,9 +37,6 @@ class HomeScreen: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        tableView.delegate = self
-        tableView.dataSource = self
         
         removeTranslatesAutoresizingMaskIntoConstraints()
         
@@ -85,31 +80,13 @@ class HomeScreen: UIView {
     }
     
     // MARK: Public Methods
-    
-}
-
-extension HomeScreen: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        carModels.count
+    func setTableViewDelegates(_ delegate: UITableViewDelegate, _ dataSource: UITableViewDataSource) {
+        tableView.delegate = delegate
+        tableView.dataSource = dataSource
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.identifier, for: indexPath) as? HomeTableViewCell else {
-            return UITableViewCell()
-        }
-        
-        return cell
-        
-    }
-    
     
 }
 
 protocol HomeScreenDelegate: AnyObject {
     func didTapExit()
 }
-
-
-

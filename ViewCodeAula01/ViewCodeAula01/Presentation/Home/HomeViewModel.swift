@@ -7,25 +7,26 @@
 
 import Foundation
 
-class HomeViewModel: MainViewModel {
+class HomeViewModel {
     
-    var models: [CarModel]
+    private let cars: [CarModel]
     
-    private(set) var userModel: UserModel?
+    private(set) var user: UserModel?
     
-    init() {
-        
-        let models: [CarModel] = [
-            CarModel(year: 1998, name: "Chevete", imageURL: ""),
-            CarModel(year: 1993, name: "Opala", imageURL: "")
-        ]
-        
-        self.models = models
-        
+    var numberOfRows: Int {
+        cars.count
     }
     
-    func setUserModel(_ model: UserModel) {
-        userModel = model
+    init(cars: [CarModel]) {
+        self.cars = cars
+    }
+    
+    func setUser(_ user: UserModel) {
+        self.user = user
+    }
+    
+    func cellModel(at index: Int) -> CarModel {
+        return cars[index]
     }
 
 }
