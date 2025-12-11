@@ -21,11 +21,11 @@ struct StorieModel {
     
     static let stories: [StorieModel] = [
         .init(image: .woman1, name: "Maria Angela"),
-        .init(image: .woman2, name: "Carlos Miguel", thisIsLive: true),
+        .init(image: .woman2, name: "Joana Reis", thisIsLive: true),
         .init(image: .woman3, name: "Ana Maria"),
-        .init(image: .woman4, name: "Diego Almeida"),
+        .init(image: .woman4, name: "Jessica Almeida"),
         .init(image: .woman5, name: "Bruna Oliveira"),
-        .init(image: .woman6, name: "Vagner Reis")
+        .init(image: .woman6, name: "Fernanda Goes")
     ]
     
 }

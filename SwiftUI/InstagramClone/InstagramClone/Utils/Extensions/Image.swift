@@ -28,4 +28,8 @@ extension Image {
     
     static var banner: Image = Image("banner")
     
+    static var comment: Image = Image("comment")
+    static var like: Image = Image("like")
+    static var save: Image = Image("save")
+    
 }

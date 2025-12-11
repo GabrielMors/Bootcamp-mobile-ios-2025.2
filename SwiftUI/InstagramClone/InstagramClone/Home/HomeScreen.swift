@@ -7,18 +7,16 @@
 
 import SwiftUI
 
-struct Modelo: Hashable {
-    let id = UUID().uuidString
-}
-
 // TODO: 1 - Voltar as imagens
 // TODO: 2 @Namespace - Para fazer anim dos pontos DOTS
 
 struct HomeScreen: View {
     
-    @State var currentIndex: CGFloat = 0
+    @EnvironmentObject var viewModel: HomeViewModel
     
-    let modelos = [Modelo(), Modelo(), Modelo()]
+    //    init(viewModel: HomeViewModel) {
+    //        self._viewModel = StateObject(wrappedValue: viewModel)
+    //    }
     
     var body: some View {
         // MARK: Container
@@ -26,26 +24,22 @@ struct HomeScreen: View {
             
             // MARK: Header
             HeaderView()
-            // MARK: Stories
-            StoriesView()
-            // MARK: Post
-            PostView()
-            // MARK: Banner
-            BannerView(currentIndex: $currentIndex)
             
-            HStack(spacing: 2) {
+            ScrollView {
+                // MARK: Stories
+                StoriesView()
+                    .padding(.top, 16)
+                // MARK: Post
+                PostView()
+                // MARK: Banner
+                BannerView()
                 
-                ForEach(Array(modelos.enumerated()), id: \.element) { index, modelo in
-                    RoundedRectangle(cornerRadius: 3)
-                        .frame(width: 12, height: 8)
-                        .foregroundStyle(Int(currentIndex) == index ? .yellow : .gray)
-                        .animation(.default, value: currentIndex)
-                }
-
+                DetailsView()
+                
+                Spacer(minLength: 48)
             }
-            .padding(.top, 0)
+            .padding(.top, -16)
             
-            Spacer()
             
         } // END: Container
     }
@@ -54,4 +48,5 @@ struct HomeScreen: View {
 
 #Preview {
     HomeScreen()
+        .environmentObject(HomeViewModel())
 }

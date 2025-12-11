@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct InstagramCloneApp: App {
+    
+    @StateObject private var viewModel = HomeViewModel()
+    
     var body: some Scene {
         WindowGroup {
             HomeScreen()
+                .environmentObject(viewModel)
         }
     }
 }
