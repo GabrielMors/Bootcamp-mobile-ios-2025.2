@@ -18,25 +18,21 @@ struct HomeScreen: View {
     //        self._viewModel = StateObject(wrappedValue: viewModel)
     //    }
     
-    var body: some View {
+    var body: some View { 
         // MARK: Container
         VStack(spacing: 16) {
             
             // MARK: Header
             HeaderView()
             
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 // MARK: Stories
                 StoriesView()
                     .padding(.top, 16)
-                // MARK: Post
-                PostView()
                 // MARK: Banner
                 BannerView()
                 
-                DetailsView()
-                
-                Spacer(minLength: 48)
+                Spacer(minLength: 72)
             }
             .padding(.top, -16)
             

@@ -11,40 +11,51 @@ import SwiftUI
 
 class HomeViewModel: ObservableObject {
     
-    let modelos = Modelo.modelos()
+    let items: Array<ProfileModel> = ProfileModel.items
     
-    @Published var currentIndex: CGFloat = 0
+    @Published var currentIndexArray: [CGFloat] = []
     
-    @Published var offesetX: CGFloat = .zero
+    @Published var offesetXArray: [CGFloat] = []
     @Published var heightContainer: CGFloat = .zero
     
     let limit: CGFloat = -100
     let innerPadding: CGFloat = 4
     
-    func onChnaged(gesture: DragGesture.Value, geometry: GeometryProxy) {
-        guard currentIndex < CGFloat(modelos.count - 1), gesture.translation.width < 0 else { return }
+    init() {
+        for i in 0..<items.count {
+            offesetXArray.append(CGFloat(i))
+            currentIndexArray.append(0)
+        }
+    }
+    
+    func onChnaged(
+        gesture: DragGesture.Value,
+        geometry: GeometryProxy,
+        index: Int
+    ) {
+        guard currentIndexArray[index] < CGFloat(items[index].banners.count - 1), gesture.translation.width < 0 else { return }
         
         let screenWidth = geometry.size.width + innerPadding
          
-        offesetX = gesture.translation.width + -(currentIndex * screenWidth)
+        offesetXArray[index] = gesture.translation.width + -(currentIndexArray[index] * screenWidth)
     }
     
-    func onEnded(geometry: GeometryProxy) {
+    func onEnded(geometry: GeometryProxy, index: Int) {
         
-        guard currentIndex < CGFloat(modelos.count - 1) else { return }
+        guard currentIndexArray[index] < CGFloat(items[index].banners.count - 1) else { return }
         
         let screenWidth = geometry.size.width + innerPadding // "= 400"
         
-        if offesetX > limit {
+        if offesetXArray[index] > limit {
             withAnimation {
-                offesetX = 0
+                offesetXArray[index] = 0
             }
         } else {
             
-            currentIndex += 1
+            currentIndexArray[index] += 1
             
             withAnimation {
-                offesetX = -(screenWidth * currentIndex)
+                offesetXArray[index] = -(screenWidth * currentIndexArray[index])
             }
         }
     }
@@ -53,31 +64,4 @@ class HomeViewModel: ObservableObject {
         heightContainer = geometry.size.width + 60
     }
 }
-
-
-struct Modelo: Hashable {
-    let id = UUID().uuidString
-    let image: Image
-    
-    init(image: Image) {
-        self.image = image
-    }
-    
-    static func == (lhs: Modelo, rhs: Modelo) -> Bool {
-        lhs.id == rhs.id
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
-    static func modelos() -> [Self] {
-        return [
-            .init(image: Image.woman1),
-            .init(image: Image.woman2),
-            .init(image: Image.woman3)
-        ]
-    }
-}
-
 

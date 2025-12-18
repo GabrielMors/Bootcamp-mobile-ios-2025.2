@@ -17,11 +17,11 @@ struct DetailsView: View {
             ZStack {
                 
                 HStack(spacing: 1) {
-                    ForEach(Array(homeViewModel.modelos.enumerated()), id: \.element) { index, modelo in
+                    ForEach(Array(homeViewModel.items.enumerated()), id: \.element) { index, modelo in
                         Circle()
                             .frame(width: 12, height: 8)
-                            .foregroundStyle(Int(homeViewModel.currentIndex) == index ? .blue : .gray.opacity(0.6))
-                            .animation(.default, value: homeViewModel.currentIndex)
+                            .foregroundStyle(Int(homeViewModel.currentIndexArray[index]) == index ? .blue : .gray.opacity(0.6))
+                            .animation(.default, value: homeViewModel.currentIndexArray)
                     }
                 }
                 .padding(.top, 8)

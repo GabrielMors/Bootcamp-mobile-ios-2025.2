@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct PostView: View {
+    
+    private let profile: ProfileModel
+    
+    init(profile: ProfileModel) {
+        self.profile = profile
+    }
+    
     var body: some View {
         
         HStack {
             
-            Image.woman4
+            profile.personImage
                 .resizable()
                 .scaledToFill()
                 .frame(width: 32, height: 32)
@@ -21,13 +28,13 @@ struct PostView: View {
             
             VStack(alignment: .leading, spacing: 2) {
                 HStack {
-                    Text("joshua_l")
+                    Text(profile.name)
                         .font(.callout)
                         .bold()
                     
                     Image.officialIcon
                 }
-                Text("Tokyo, Japan")
+                Text(profile.city)
                     .font(.caption)
                     .fontWeight(.light)
             }
@@ -43,5 +50,5 @@ struct PostView: View {
 }
 
 #Preview {
-    PostView()
+    PostView(profile: .init(banners: [], name: "joshua_l", city: "Tokyo, Japan", personImage: .woman3))
 }
