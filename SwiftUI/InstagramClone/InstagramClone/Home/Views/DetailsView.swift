@@ -11,17 +11,25 @@ struct DetailsView: View {
     
     @EnvironmentObject var homeViewModel: HomeViewModel
     
+    private let profile: ProfileModel
+    private let profileIndex: Int
+    
+    init(profile: ProfileModel, profileIndex: Int) {
+        self.profile = profile
+        self.profileIndex = profileIndex
+    }
+    
     var body: some View {
         VStack {
             // MARK: Sec 1
             ZStack {
                 
                 HStack(spacing: 1) {
-                    ForEach(Array(homeViewModel.items.enumerated()), id: \.element) { index, modelo in
+                    ForEach(Array(profile.banners.enumerated()), id: \.element) { index, modelo in
                         Circle()
                             .frame(width: 12, height: 8)
-                            .foregroundStyle(Int(homeViewModel.currentIndexArray[index]) == index ? .blue : .gray.opacity(0.6))
-                            .animation(.default, value: homeViewModel.currentIndexArray)
+                            .foregroundStyle(Int(homeViewModel.bannerIndex[profileIndex]) == index ? .blue : .gray.opacity(0.6))
+                            .animation(.default, value: homeViewModel.bannerIndex)
                     }
                 }
                 .padding(.top, 8)
@@ -29,7 +37,12 @@ struct DetailsView: View {
                 HStack {
                     
                     HStack {
-                        Image.like
+                        Button {
+                            homeViewModel.isFavoriteArray[profileIndex].toggle()
+                        } label: {
+                            homeViewModel.isFavoriteArray[profileIndex] ? Image.likeFill : Image.like
+                        }
+
                         Image.comment
                         Image.messanger
                     }
@@ -71,10 +84,11 @@ struct DetailsView: View {
             
         }
         .padding(.horizontal, 12)
+        
     }
 }
 
 #Preview {
-    DetailsView()
+    DetailsView(profile: .init(banners: [], name: "", city: "", personImage: .woman1), profileIndex: 0)
         .environmentObject(HomeViewModel())
 }

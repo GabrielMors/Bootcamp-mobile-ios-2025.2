@@ -30,6 +30,7 @@ extension Image {
     
     static var comment: Image = Image("comment")
     static var like: Image = Image("like")
+    static var likeFill: Image = Image("like_fill")
     static var save: Image = Image("save")
     
 }

@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// TODO: 1 - Voltar as imagens
-// TODO: 2 @Namespace - Para fazer anim dos pontos DOTS
+// TODO: 1 Substituir o cabecalho por um do swift
+// TODO: 2 Adicionar sec, com List
 
 struct HomeScreen: View {
     
@@ -18,26 +18,28 @@ struct HomeScreen: View {
     //        self._viewModel = StateObject(wrappedValue: viewModel)
     //    }
     
-    var body: some View { 
-        // MARK: Container
-        VStack(spacing: 16) {
-            
-            // MARK: Header
-            HeaderView()
-            
-            ScrollView(showsIndicators: false) {
-                // MARK: Stories
-                StoriesView()
-                    .padding(.top, 16)
-                // MARK: Banner
-                BannerView()
-                
-                Spacer(minLength: 72)
+    var body: some View {
+        NavigationStack {
+            GeometryReader { geometry in
+                VStack(spacing: 16) {
+                    
+                    // MARK: Header
+                    HeaderView()
+                    
+                    ScrollView(showsIndicators: false) {
+                        // MARK: Stories
+                        StoriesView()
+                            .padding(.top, 16)
+                        // MARK: Banner
+                        BannerView(size: geometry.size)
+                        
+                        Spacer(minLength: 72)
+                    }
+                    .padding(.top, -16)
+                    
+                }
             }
-            .padding(.top, -16)
-            
-            
-        } // END: Container
+        }
     }
     
 }

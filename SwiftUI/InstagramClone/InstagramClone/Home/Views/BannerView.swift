@@ -13,86 +13,70 @@ import SwiftUI
 struct BannerView: View {
     
     @EnvironmentObject var homeViewModel: HomeViewModel
+    private let size: CGSize
     
-    @State var totalPostsheight: CGFloat = 0
+    init(size: CGSize) {
+        self.size = size
+    }
     
     var body: some View {
-        GeometryReader { geometry in
             VStack(alignment: .leading) {
-                ForEach(Array(homeViewModel.items.enumerated()), id: \.element) { indexMatriz, profile in
+                ForEach(Array(homeViewModel.items.enumerated()), id: \.element) { profileIndex, profile in
                     VStack(alignment: .leading) {
                         
                         PostView(profile: profile)
-                            .overlay {
-                                GeometryReader { geo in
-                                    Color.clear
-                                        .onAppear {
-                                            totalPostsheight += geo.size.height
-                                        }
-                                }
-                            }
                         
                         ZStack(alignment: .topLeading) {
                             
                             // Container
-                            HStack(spacing: homeViewModel.innerPadding) {
-                                
-                                ForEach(Array(profile.banners.enumerated()), id: \.element) { indexItem, item in
-                                    item.image
-                                        .resizable()
-                                        .frame(width: geometry.size.width, height: homeViewModel.heightContainer)
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: homeViewModel.innerPadding) {
+                                    
+                                    ForEach(Array(profile.banners.enumerated()), id: \.element) { indexItem, item in
+                                        item.image
+                                            .resizable()
+                                            .frame(width: size.width, height: size.width + (size.width / 6))
+                                            .padding(.leading, homeViewModel.profileIndex[profileIndex] == 0 ? 0 : -homeViewModel.innerPadding)
+                                            .id(indexItem)
+                                        
+                                    }
                                     
                                 }
-                                
                             }
-                            .offset(x: homeViewModel.offesetXArray[indexMatriz])
-                            .simultaneousGesture(
-                                DragGesture()
-                                    .onChanged({
-                                        homeViewModel.onChnaged(gesture: $0, geometry: geometry, index: indexMatriz)
-                                    })
-                                    .onEnded({ _ in
-                                        homeViewModel.onEnded(geometry: geometry, index: indexMatriz)
-                                    })
-                            )
+                            .scrollTargetLayout()
+                            .scrollTargetBehavior(.paging)
+                            .scrollPosition(id: $homeViewModel.profileIndex[profileIndex])
                             
                             Capsule()
                                 .frame(width: 34, height: 26)
                                 .overlay(content: {
-                                    Text("\(Int(homeViewModel.currentIndexArray[indexMatriz] + 1))/\(profile.banners.count)")
+                                    Text("\(Int(homeViewModel.bannerIndex[profileIndex] + 1))/\(profile.banners.count)")
                                         .foregroundStyle(.white)
                                         .font(.footnote)
-                                        .animation(.easeInOut, value: homeViewModel.currentIndexArray[indexMatriz])
+                                        .animation(.easeInOut, value: homeViewModel.bannerIndex[profileIndex])
                                 })
-                                .offset(x: geometry.size.width - 44, y: 16)
+                                .offset(x: size.width - 44, y: 16)
+                        }
+                        .onChange(of: homeViewModel.profileIndex[profileIndex]) { oldValue, newValue in
+                            homeViewModel.bannerIndex[profileIndex] = CGFloat(newValue ?? 0)
                         }
                         
-                        DetailsView()
-                            .overlay {
-                                GeometryReader { geo in
-                                    Color.clear
-                                        .onAppear {
-                                            totalPostsheight += geo.size.height
-                                        }
-                                }
-                            }
+                        DetailsView(profile: profile, profileIndex: profileIndex)
                         
                     }
                     .padding(
-                        .top, indexMatriz == 0 ? 0 : 16
+                        .top, profileIndex == 0 ? 0 : 16
                     )
-                }.onAppear {
-                    homeViewModel.setHeightContainer(geometry: geometry)
                 }
+                
             }
-        } // end geometry
-        .frame(height: (homeViewModel.heightContainer * CGFloat(homeViewModel.items.count) + totalPostsheight))
+        
     }
 }
 
 #Preview {
     ScrollView {
-        BannerView()
+        BannerView(size: .zero)
             .environmentObject(HomeViewModel())
     }
 }
