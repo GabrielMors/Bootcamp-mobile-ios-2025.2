@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct StoriesView: View {
+    
+    private var namespace: Namespace.ID
+    
+    init(namespace: Namespace.ID) {
+        self.namespace = namespace
+    }
+    
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(StorieModel.stories, id: \.name) { storie in
-                    StoriesItemView(model: storie)
+                ForEach(StoryModel.stories, id: \.name) { storie in
+                    StoriesItemView(
+                        namespace: namespace,
+                        model: storie
+                    )
                 }
             }
             .padding(.horizontal)
@@ -28,5 +38,8 @@ struct StoriesView: View {
 }
 
 #Preview {
-    StoriesView()
+    
+    @Previewable @Namespace var namespace
+    
+    StoriesView(namespace: namespace)
 }

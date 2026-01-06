@@ -9,9 +9,13 @@ import SwiftUI
 
 struct StoriesItemView: View {
     
-    private let model: StorieModel
+    @EnvironmentObject var viewModel: HomeViewModel
     
-    init(model: StorieModel) {
+    private var namespace: Namespace.ID
+    private let model: StoryModel
+    
+    init(namespace: Namespace.ID ,model: StoryModel) {
+        self.namespace = namespace
         self.model = model
     }
     
@@ -35,6 +39,11 @@ struct StoriesItemView: View {
                             .offset(y: 8)
                     }
                 }
+                
+            }
+            .matchedGeometryEffect(id: "banner-\(model.id)", in: namespace)
+            .onTapGesture {
+                viewModel.showStory(withModel: model)
             }
             
             Text(model.name)
@@ -46,12 +55,19 @@ struct StoriesItemView: View {
 
 #if DEBUG
 #Preview {
-    StoriesItemView(
-        model: .mock
-    )
+    
+    @Previewable @Namespace var namespace
     
     StoriesItemView(
+        namespace: namespace,
+        model: .mock
+    )
+    .environmentObject(HomeViewModel())
+    
+    StoriesItemView(
+        namespace: namespace,
         model: .mockWithLive
     )
+    .environmentObject(HomeViewModel())
 }
 #endif

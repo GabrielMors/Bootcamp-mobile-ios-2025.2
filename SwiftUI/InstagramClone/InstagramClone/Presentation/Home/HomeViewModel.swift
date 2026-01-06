@@ -17,6 +17,10 @@ class HomeViewModel: ObservableObject {
     @Published var profileIndex: [Int?] = []
     @Published var isFavoriteArray: [Bool] = []
     
+    @Published private(set) var showStory = false
+    
+    @Published private(set) var currentStorieModel: StoryModel?
+    
     let limit: CGFloat = -100
     let innerPadding: CGFloat = 4
     
@@ -25,6 +29,20 @@ class HomeViewModel: ObservableObject {
             bannerIndex.append(0)
             profileIndex.append(i)
             isFavoriteArray.append(false)
+        }
+    }
+    
+    func showStory(withModel model: StoryModel) {
+        withAnimation(.spring(response: 0.35, dampingFraction: 0.95)) {
+            showStory = true
+            currentStorieModel = model
+        }
+    }
+    
+    func hideStory() {
+        withAnimation(.spring(response: 0.35, dampingFraction: 0.95)) {
+            showStory = false
+            currentStorieModel = nil
         }
     }
 
