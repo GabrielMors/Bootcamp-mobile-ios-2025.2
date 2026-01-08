@@ -35,6 +35,7 @@ struct BannerView: View {
                                     ForEach(Array(profile.banners.enumerated()), id: \.element) { indexItem, item in
                                         item.image
                                             .resizable()
+                                            .scaledToFill()
                                             .frame(width: size.width, height: size.width + (size.width / 6))
                                             .padding(.leading, homeViewModel.profileIndex[profileIndex] == 0 ? 0 : -homeViewModel.innerPadding)
                                             .id(indexItem)
@@ -58,7 +59,9 @@ struct BannerView: View {
                                 .offset(x: size.width - 44, y: 16)
                         }
                         .onChange(of: homeViewModel.profileIndex[profileIndex]) { oldValue, newValue in
-                            homeViewModel.bannerIndex[profileIndex] = CGFloat(newValue ?? 0)
+                            withAnimation {
+                                homeViewModel.bannerIndex[profileIndex] = CGFloat(newValue ?? 0)
+                            }
                         }
                         
                         DetailsView(profile: profile, profileIndex: profileIndex)
@@ -76,7 +79,7 @@ struct BannerView: View {
 
 #Preview {
     ScrollView {
-        BannerView(size: .zero)
+        BannerView(size: CGSize(width: UIScreen.main.bounds.width, height: 500))
             .environmentObject(HomeViewModel())
     }
 }

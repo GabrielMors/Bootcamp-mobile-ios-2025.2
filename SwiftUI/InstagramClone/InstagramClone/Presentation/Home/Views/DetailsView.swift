@@ -11,6 +11,8 @@ struct DetailsView: View {
     
     @EnvironmentObject var homeViewModel: HomeViewModel
     
+    @Namespace var namespace
+    
     private let profile: ProfileModel
     private let profileIndex: Int
     
@@ -24,12 +26,19 @@ struct DetailsView: View {
             // MARK: Sec 1
             ZStack {
                 
-                HStack(spacing: 1) {
+                HStack(spacing: 2) {
                     ForEach(Array(profile.banners.enumerated()), id: \.element) { index, modelo in
-                        Circle()
-                            .frame(width: 12, height: 8)
-                            .foregroundStyle(Int(homeViewModel.bannerIndex[profileIndex]) == index ? .blue : .gray.opacity(0.6))
-                            .animation(.default, value: homeViewModel.bannerIndex)
+                        ZStack {
+                            Capsule()
+                                .frame(width: 16, height: 7)
+                                .foregroundStyle(.gray.opacity(0.6))
+                            if Int(homeViewModel.bannerIndex[profileIndex]) == index {
+                                Capsule()
+                                    .frame(width: 16, height: 7)
+                                    .foregroundStyle(.blue)
+                                    .matchedGeometryEffect(id: "dots", in: namespace)
+                            }
+                        }
                     }
                 }
                 .padding(.top, 8)
@@ -42,7 +51,7 @@ struct DetailsView: View {
                         } label: {
                             homeViewModel.isFavoriteArray[profileIndex] ? Image.likeFill : Image.like
                         }
-
+                        
                         Image.comment
                         Image.messanger
                     }

@@ -9,18 +9,11 @@ import SwiftUI
 
 struct StoriesView: View {
     
-    private var namespace: Namespace.ID
-    
-    init(namespace: Namespace.ID) {
-        self.namespace = namespace
-    }
-    
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(StoryModel.stories, id: \.name) { storie in
                     StoriesItemView(
-                        namespace: namespace,
                         model: storie
                     )
                 }
@@ -39,7 +32,5 @@ struct StoriesView: View {
 
 #Preview {
     
-    @Previewable @Namespace var namespace
-    
-    StoriesView(namespace: namespace)
+    StoriesView()
 }

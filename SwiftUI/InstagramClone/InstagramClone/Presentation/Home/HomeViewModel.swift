@@ -21,6 +21,13 @@ class HomeViewModel: ObservableObject {
     
     @Published private(set) var currentStorieModel: StoryModel?
     
+    @Published var timelineWidth: CGFloat = .zero
+    @Published var timelineCurrentIndex: Int = 0
+    @Published var totalSeconds: Int = 3
+    
+    @Published var hideHistoryWorkItem: DispatchWorkItem?
+    @Published var timelineCurrentIndexWorkItem: [DispatchWorkItem?] = []
+    
     let limit: CGFloat = -100
     let innerPadding: CGFloat = 4
     
@@ -45,6 +52,46 @@ class HomeViewModel: ObservableObject {
             currentStorieModel = nil
         }
     }
-
+    
+    func showStoryDisappear() {
+        timelineWidth = .zero
+        timelineCurrentIndex = 0
+        totalSeconds = 3
+        hideHistoryWorkItem?.cancel()
+        hideHistoryWorkItem = nil
+        
+        for i in 0..<timelineCurrentIndexWorkItem.count {
+            timelineCurrentIndexWorkItem[i]?.cancel()
+            timelineCurrentIndexWorkItem[i] = nil
+        }
+        
+        timelineCurrentIndexWorkItem = []
+    }
+    
+    func showStoryAppear(model: StoryModel) {
+        let delay = 3
+        
+        for i in 1..<model.storyDetails.count {
+            
+            totalSeconds += delay
+            
+            timelineCurrentIndexWorkItem.append(DispatchWorkItem(block: {
+                self.timelineCurrentIndex = i
+            }))
+            
+            guard let item = timelineCurrentIndexWorkItem[i - 1] else {
+                return
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delay * i), execute: item)
+        }
+        
+        hideHistoryWorkItem = DispatchWorkItem {
+            self.hideStory()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(totalSeconds), execute: hideHistoryWorkItem!)
+    }
+    
 }
 
