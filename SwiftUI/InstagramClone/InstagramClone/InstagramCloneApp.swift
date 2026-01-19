@@ -12,6 +12,8 @@ import SwiftUI
 @main
 struct InstagramCloneApp: App {
     
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     @StateObject private var sharedNavViewModel = SharedNavigationViewModel()
     
     @StateObject private var appViewModel = AppViewModel()

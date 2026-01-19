@@ -11,6 +11,8 @@ struct HomeScreen: View {
     
     @EnvironmentObject var viewModel: HomeViewModel
     
+    @StateObject var navigation = HomeNavigation()
+    
     //    init(viewModel: HomeViewModel) {
     //        self._viewModel = StateObject(wrappedValue: viewModel)
     //    }
@@ -82,7 +84,6 @@ struct HomeScreen: View {
     }
     
     var home: some View {
-        NavigationStack {
             GeometryReader { geometry in
                 VStack(spacing: 16) {
                     
@@ -103,7 +104,6 @@ struct HomeScreen: View {
                 }
                 
             }
-        }
         .transition(.asymmetric(
             insertion: .opacity.combined(with: .scale(scale: 0.95)),
             removal: .opacity
@@ -111,10 +111,31 @@ struct HomeScreen: View {
     }
     
     var body: some View {
-        if viewModel.showStory {
-            story
-        } else {
-            home
+        NavigationStack(path: $navigation.path) {
+            Group {
+                if viewModel.showStory {
+                    story
+                        .toolbarVisibility(.hidden, for: .tabBar)
+                } else {
+                    ZStack {
+                        home
+                            .environmentObject(navigation)
+                            .toolbarVisibility(.visible, for: .tabBar)
+                    }
+                }
+            }
+            .navigationDestination(for: HomeNavigation.HomePath.self) { path in
+                switch path {
+                case .home:
+                    HomeScreen()
+                case .photo:
+                    PhotoScreen()
+                        .environmentObject(navigation)
+                case .share:
+                    ShareScreen()
+                        .environmentObject(navigation)
+                }
+            }
         }
     }
     

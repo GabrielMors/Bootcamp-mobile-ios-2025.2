@@ -21,19 +21,27 @@ struct TabScreen: View {
             }
             
             Tab("Search", systemImage: "magnifyingglass", value: .search) {
-                Text("Search")
+                NavigationStack {
+                    Text("Search")
+                }
             }
 
             Tab("More", systemImage: "plus.app", value: .more) {
-                MoreScreen()
+                NavigationStack {
+                    MoreScreen()
+                }
             }
             
             Tab("Favorite", systemImage: "heart", value: .favorite) {
-                Text("Favorite")
+                NavigationStack {
+                    Text("Favorite")
+                }
             }
             
             Tab("Profile", systemImage: "photo.artframe.circle.fill", value: .profile) {
-                Text("profile")
+                NavigationStack {
+                    Text("profile")
+                }
             }
         }
     }

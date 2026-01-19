@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct HeaderView: View {
+    
+    @EnvironmentObject var navigation: HomeNavigation
+    
     var body: some View {
         ZStack {
             
             HStack {
                 Button {
-                     print("Click cameraIcon")
+                    navigation.navigate(to: .photo)
                 } label: {
                     Image.cameraIcon
                 }
@@ -21,7 +24,12 @@ struct HeaderView: View {
                 Spacer()
                 HStack(spacing: 16) {
                     Image.igtv
-                    Image.messanger
+                    Button {
+                        navigation.navigate(to: .share)
+                    } label: {
+                        Image.messanger
+                    }
+
                 }
             } // END: Header
             .padding(.horizontal, 12)
@@ -41,4 +49,5 @@ struct HeaderView: View {
 
 #Preview {
     HeaderView()
+        .environmentObject(HomeNavigation())
 }
