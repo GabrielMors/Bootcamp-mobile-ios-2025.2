@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 // TODO: Customizar a tabbar (nao precisar ser uma custumizada) usando TabView
 
@@ -24,19 +25,26 @@ struct InstagramCloneApp: App {
             Group {
                 switch appViewModel.uiState {
                 case .idle:
-                    Text("IDLE").onAppear {
+                    ZStack {
+                        LaunchScreenLoading()
+                        ProgressView {
+                            Text("Carregando...")
+                        }
+                        .offset(y: 128 / 2 + 32)
+                    }
+                    .onAppear {
                         appViewModel.fetchData()
                     }
-                case .loading:
-                    ProgressView {
-                        Text("Carregando")
-                    }
+                    .ignoresSafeArea()
                 case .auth:
                     TabScreen()
                         .environmentObject(sharedNavViewModel)
                         .environmentObject(appViewModel)
                 case .login:
                     Button {
+                        
+                        Auth.auth().signIn(withEmail: "vagner.reis@gmail.com", password: "123456")
+                        
                         appViewModel.fetchData()
                     } label: {
                         Text("Logar")

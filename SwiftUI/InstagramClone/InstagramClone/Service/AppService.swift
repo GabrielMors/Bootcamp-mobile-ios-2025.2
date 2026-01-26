@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import FirebaseAuth
 
-typealias Model = Bool
+typealias Model = UserModel
 
 struct AppService: AppServiceProtocol {
     
@@ -17,29 +18,41 @@ struct AppService: AppServiceProtocol {
         self.myUserDefaults = myUserDefaults
     }
     
-    func fetchData() async throws -> Model {
+    func fetchData() async throws -> Model? {
         // Reqisicao
         try? await Task.sleep(nanoseconds: 3_000_000_000)
-        return true
+        return UserModel(email: "")
         
     }
     
-    func fetchData(complition: @escaping (Result<Model, Error>) -> Void) {
-        // Reqisicao
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
-            myUserDefaults.setIsAuth(true)
-            // Se des sucesso com a model no lugar do boolean
-            complition(.success(true))
-            
-            // caso de erro eu lanço
-            //complition(.failure(NSError(domain: "com.instagram", code: 10)))
+    func fetchData(complition: @escaping (Result<Model?, AppError>) -> Void) {
+       let currentUser = Auth.auth().currentUser
+        
+        guard let currentUser else {
+            complition(.success(nil))
+            return
         }
         
+        let email = currentUser.email
+        
+        guard let email else {
+            complition(.failure(.emailNotFound))
+            return
+        }
+        
+        // Logado
+        complition(.success(UserModel(email: email)))
     }
     
 }
 
 protocol AppServiceProtocol {
-    func fetchData() async throws -> Bool
-    func fetchData(complition: @escaping (Result<Bool, Error>) -> Void)
+    func fetchData() async throws -> Model?
+    func fetchData(complition: @escaping (Result<Model?, AppService.AppError>) -> Void)
+}
+
+extension AppService {
+    enum AppError: Error {
+        case emailNotFound
+    }
 }

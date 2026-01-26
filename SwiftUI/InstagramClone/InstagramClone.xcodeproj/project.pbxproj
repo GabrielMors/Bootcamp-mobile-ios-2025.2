@@ -6,13 +6,32 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C710FF9B2F2820060053F6F0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C710FF9A2F2820060053F6F0 /* FirebaseAuth */; };
+		C710FF9D2F2820060053F6F0 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C710FF9C2F2820060053F6F0 /* FirebaseDatabase */; };
+		C710FF9F2F2820060053F6F0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C710FF9E2F2820060053F6F0 /* FirebaseFirestore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		C70C7DBB2EE78403006C3453 /* InstagramClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		C710FFEE2F2828490053F6F0 /* Exceptions for "InstagramClone" folder in "InstagramClone" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = C70C7DBA2EE78403006C3453 /* InstagramClone */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		C70C7DBD2EE78403006C3453 /* InstagramClone */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C710FFEE2F2828490053F6F0 /* Exceptions for "InstagramClone" folder in "InstagramClone" target */,
+			);
 			path = InstagramClone;
 			sourceTree = "<group>";
 		};
@@ -23,6 +42,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C710FF9D2F2820060053F6F0 /* FirebaseDatabase in Frameworks */,
+				C710FF9B2F2820060053F6F0 /* FirebaseAuth in Frameworks */,
+				C710FF9F2F2820060053F6F0 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +87,9 @@
 			);
 			name = InstagramClone;
 			packageProductDependencies = (
+				C710FF9A2F2820060053F6F0 /* FirebaseAuth */,
+				C710FF9C2F2820060053F6F0 /* FirebaseDatabase */,
+				C710FF9E2F2820060053F6F0 /* FirebaseFirestore */,
 			);
 			productName = InstagramClone;
 			productReference = C70C7DBB2EE78403006C3453 /* InstagramClone.app */;
@@ -94,6 +119,9 @@
 			);
 			mainGroup = C70C7DB22EE78403006C3453;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C710FF992F2820060053F6F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C70C7DBC2EE78403006C3453 /* Products */;
 			projectDirPath = "";
@@ -256,9 +284,10 @@
 				DEVELOPMENT_TEAM = D38F29JV6F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = InstagramClone/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
@@ -289,9 +318,10 @@
 				DEVELOPMENT_TEAM = D38F29JV6F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = InstagramClone/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
@@ -334,6 +364,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C710FF992F2820060053F6F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C710FF9A2F2820060053F6F0 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C710FF992F2820060053F6F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		C710FF9C2F2820060053F6F0 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C710FF992F2820060053F6F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		C710FF9E2F2820060053F6F0 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C710FF992F2820060053F6F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C70C7DB32EE78403006C3453 /* Project object */;
 }

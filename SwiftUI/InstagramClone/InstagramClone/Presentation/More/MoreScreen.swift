@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct MoreScreen: View {
     
@@ -22,7 +23,13 @@ struct MoreScreen: View {
         }
         
         Button {
-            appViewModel.uiState = .login
+            do {
+                try Auth.auth().signOut()
+                appViewModel.uiState = .login
+            } catch {
+                print("Erro ao tentar sair", error)
+            }
+            
         } label: {
             
             Text("Sair")
