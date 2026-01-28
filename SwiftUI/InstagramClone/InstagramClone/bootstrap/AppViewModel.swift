@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import FirebaseAuth
 
 @MainActor
 class AppViewModel: ObservableObject {
@@ -17,23 +18,30 @@ class AppViewModel: ObservableObject {
     
     private let service: AppServiceProtocol
     
+    @Published var isLoading: Bool = false
+    
+    @Published private(set) var loginErrorMessage: String?
+    
     init() {
         myUserDefaults = MyUserDetauls()
         self.service = AppService(myUserDefaults: myUserDefaults)
     }
     
-//    func fetchData() {
-//        uiState = .loading
-//        
-//        Task {
-//            await service.fetchData()
-//            self.uiState = .auth
-//        }
-//    }
+    //    func fetchData() {
+    //        uiState = .loading
+    //
+    //        Task {
+    //            await service.fetchData()
+    //            self.uiState = .auth
+    //        }
+    //    }
     
     func fetchData() {
         
         service.fetchData { result in
+            
+            self.isLoading = false
+            
             switch result {
             case .success(let model):
                 
@@ -43,12 +51,38 @@ class AppViewModel: ObservableObject {
                 }
                 
                 self.uiState = .login
-               
-              
+                
             case .failure(let error):
                 self.uiState = .error(error.localizedDescription)
             }
+            
         }
+    }
+    
+    func login(
+        withEmail email: String,
+        andPaswword password: String
+    ) {
+         isLoading = true
+        
+        Auth.auth().signIn(
+            withEmail: email,
+            password: password
+        ) { result, error in
+            
+            if let error {
+                self.loginErrorMessage = error.localizedDescription
+                self.isLoading = false
+                return
+            }
+            
+            self.fetchData()
+
+        }
+    }
+    
+    func clearError() {
+        loginErrorMessage = nil
     }
     
 }
