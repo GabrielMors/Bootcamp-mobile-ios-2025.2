@@ -14,11 +14,15 @@ struct CustomTextFieldView: View {
     
     @Binding private var text: String
     
-    init(placeholder: String, text: Binding<String>, textContentType: TextContentType? = nil) {
-        self.placeholder = placeholder
-        self.textContentType = textContentType
-        self._text = text
-    }
+    init(
+        placeholder: String,
+        text: Binding<String>,
+        textContentType: TextContentType? = nil
+    ) {
+            self.placeholder = placeholder
+            self.textContentType = textContentType
+            self._text = text
+        }
     
     var body: some View {
         
@@ -28,7 +32,7 @@ struct CustomTextFieldView: View {
                 .textFieldStyle()
         case nil:
             TextField(placeholder, text: $text)
-                 .textFieldStyle()
+                .textFieldStyle()
         }
     }
 }
@@ -54,11 +58,11 @@ fileprivate struct TextFieldModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding()
-            .frame(height: 50)
+            .frame(height: ICConstants.Metrics.inputHeight)
             .background(.gray.opacity(0.1))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .clipShape(RoundedRectangle(cornerRadius: ICConstants.Metrics.cornerRadius))
             .overlay(content: {
-                RoundedRectangle(cornerRadius: 12)
+                RoundedRectangle(cornerRadius: ICConstants.Metrics.cornerRadius)
                     .stroke(.gray.opacity(0.4), lineWidth: 1)
             })
     }

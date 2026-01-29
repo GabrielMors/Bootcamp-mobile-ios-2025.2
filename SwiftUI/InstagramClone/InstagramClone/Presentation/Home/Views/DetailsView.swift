@@ -48,6 +48,11 @@ struct DetailsView: View {
                     HStack {
                         Button {
                             homeViewModel.isFavoriteArray[profileIndex].toggle()
+                            
+                            let isFavorite = homeViewModel.isFavoriteArray[profileIndex]
+                            
+                            ICFirestore.shared.favoriteToggle(isFavorite: isFavorite, model: profile)
+                            
                         } label: {
                             homeViewModel.isFavoriteArray[profileIndex] ? Image.likeFill : Image.like
                         }
