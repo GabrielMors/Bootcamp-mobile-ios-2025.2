@@ -18,6 +18,8 @@ struct InstagramCloneApp: App {
     
     @StateObject private var appViewModel = AppViewModel()
     
+    @StateObject private var authNavigationViewModel = AuthNavigationViewModel()
+    
     var body: some Scene {
         WindowGroup {
             
@@ -40,8 +42,23 @@ struct InstagramCloneApp: App {
                         .environmentObject(sharedNavViewModel)
                         .environmentObject(appViewModel)
                 case .login:
-                    LoginScreen()
-                        .environmentObject(appViewModel)
+                    NavigationStack(path: $authNavigationViewModel.path) {
+                        LoginScreen()
+                            .environmentObject(authNavigationViewModel)
+                            .environmentObject(appViewModel)
+                            .navigationDestination(for: AuthNavigationViewModel.AuthNavigationPath.self) { path in
+                                switch path {
+                                case .login:
+                                    LoginScreen()
+                                case .register:
+                                    RegisterScreen()
+                                        .environmentObject(appViewModel)
+                                        .environmentObject(authNavigationViewModel)
+                                        .navigationBarBackButtonHidden()
+                                }
+                            }
+                    }
+ 
                 case .error(let errorString):
                     LoginScreen(applicationError: errorString)
                         .environmentObject(appViewModel)

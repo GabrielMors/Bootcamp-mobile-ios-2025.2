@@ -51,7 +51,7 @@ struct DetailsView: View {
                             
                             let isFavorite = homeViewModel.isFavoriteArray[profileIndex]
                             
-                            ICFirestore.shared.favoriteToggle(isFavorite: isFavorite, model: profile)
+                            ICRealtimeDatabase.shared.favoriteToggle(isFavorite: isFavorite, model: profile)
                             
                         } label: {
                             homeViewModel.isFavoriteArray[profileIndex] ? Image.likeFill : Image.like
@@ -98,6 +98,22 @@ struct DetailsView: View {
             
         }
         .padding(.horizontal, 12)
+        .onAppear {
+            Task {
+                do {
+                    try await ICRealtimeDatabase.shared.getProfiles()
+                } catch {
+                    print("VGN ERROR:", error)
+                }
+            }
+        }
+//        .task {
+//            do {
+//                try await ICRealtimeDatabase.shared.getProfiles()
+//            } catch {
+//                print("VGN ERROR:", error)
+//            }
+//        }
         
     }
 }

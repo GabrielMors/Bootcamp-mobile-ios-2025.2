@@ -40,6 +40,8 @@ struct AppService: AppServiceProtocol {
             return
         }
         
+        
+        
         // Logado
         complition(.success(UserModel(email: email)))
     }

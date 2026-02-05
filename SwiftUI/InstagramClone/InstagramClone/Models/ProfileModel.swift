@@ -8,6 +8,18 @@
 import Foundation
 import SwiftUI
 
+struct BannerModelTest: Decodable {
+    let image: String
+}
+
+struct ProfileModelTest: Decodable {
+    let id: String
+    let name: String
+    let city: String
+    let personImage: String
+    let banners: [BannerModelTest]
+}
+
 struct ProfileModel: Hashable {
     let id = UUID().uuidString
     let banners: [BannerModel]

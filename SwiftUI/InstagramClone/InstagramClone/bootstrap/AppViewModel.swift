@@ -63,30 +63,64 @@ class AppViewModel: ObservableObject {
         withEmail email: String,
         andPaswword password: String
     ) {
-         isLoading = true
+        isLoading = true
         
         Auth.auth().signIn(
             withEmail: email,
             password: password
         ) { result, error in
             
-            if let error {
-                self.loginErrorMessage = error.localizedDescription
-                self.isLoading = false
+            if self.showError(error) {
                 return
             }
             
             self.fetchData()
-
+            
         }
+    }
+    
+    func register(
+        withEmail email: String,
+        password: String,
+        repeatPassword: String
+    ) {
+        
+        if !password.elementsEqual(repeatPassword) {
+            loginErrorMessage = "As senhas nao batem"
+            return
+        }
+        
+        isLoading = true
+        
+        Auth.auth().createUser(
+            withEmail: email,
+            password: password
+        ) { result, error in
+            
+            if self.showError(error) {
+                return
+            }
+            
+            self.fetchData()
+        }
+        
     }
     
     func clearError() {
         loginErrorMessage = nil
     }
     
+    private func showError(_ error: Error?) -> Bool {
+        if let error {
+            self.loginErrorMessage = error.localizedDescription
+            self.isLoading = false
+            return true
+        }
+        
+        return false
+    }
+    
 }
-
 
 extension AppViewModel {
     enum UIState: Equatable {
