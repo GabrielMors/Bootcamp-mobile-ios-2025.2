@@ -11,7 +11,7 @@ import SwiftUI
 
 class HomeViewModel: ObservableObject {
     
-    let items: Array<ProfileModel> = ProfileModel.items
+    var items: Array<ProfileModel> = []
     
     @Published var bannerIndex: [CGFloat] = []
     @Published var profileIndex: [Int?] = []
@@ -32,10 +32,36 @@ class HomeViewModel: ObservableObject {
     let innerPadding: CGFloat = 4
     
     init() {
-        for i in 0..<items.count {
-            bannerIndex.append(0)
-            profileIndex.append(i)
-            isFavoriteArray.append(false)
+        
+        Task {
+            do {
+                items = try await ICRealtimeDatabase.shared.getProfiles()
+                
+                let ids = items.compactMap { model in
+                    model.id
+                }
+                
+                let findeds = try await ICRealtimeDatabase.shared.getFavoritesProfiles(ids: ids)
+             
+                for i in 0..<items.count {
+                    bannerIndex.append(0)
+                    profileIndex.append(i)
+                    
+                    
+                    let currentItem = items[i]
+                    
+                    if let findedUser = findeds.first(where: { id, isFavorite in
+                        currentItem.id == id
+                    }) {
+                        isFavoriteArray.append(findedUser.isFavorite)
+                    } else {
+                        isFavoriteArray.append(false)
+                    }
+                    
+                }
+            } catch {
+                print("Erro ao tentar pegar os profiles", error)
+            }
         }
     }
     

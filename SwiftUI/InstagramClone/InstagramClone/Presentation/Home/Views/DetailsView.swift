@@ -119,6 +119,6 @@ struct DetailsView: View {
 }
 
 #Preview {
-    DetailsView(profile: .init(banners: [], name: "", city: "", personImage: .woman1), profileIndex: 0)
+    DetailsView(profile: .init(id: "", banners: [], name: "", city: "", personImage: ""), profileIndex: 0)
         .environmentObject(HomeViewModel())
 }

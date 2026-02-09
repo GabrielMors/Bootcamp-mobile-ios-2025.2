@@ -33,12 +33,17 @@ struct BannerView: View {
                                 HStack(spacing: homeViewModel.innerPadding) {
                                     
                                     ForEach(Array(profile.banners.enumerated()), id: \.element) { indexItem, item in
-                                        item.image
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: size.width, height: size.width + (size.width / 6))
-                                            .padding(.leading, homeViewModel.profileIndex[profileIndex] == 0 ? 0 : -homeViewModel.innerPadding)
-                                            .id(indexItem)
+                                        
+                                        AsyncImage(url: URL(string: item.image)) { image in
+                                            image
+                                                .resizable()
+                                                .scaledToFill()
+                                        } placeholder: {
+                                            ProgressView()
+                                        }
+                                        .frame(width: size.width, height: size.width + (size.width / 6))
+                                        .padding(.leading, homeViewModel.profileIndex[profileIndex] == 0 ? 0 : -homeViewModel.innerPadding)
+                                        .id(indexItem)
                                         
                                     }
                                     

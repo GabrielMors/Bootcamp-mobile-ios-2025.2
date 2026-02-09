@@ -8,15 +8,14 @@
 import Foundation
 import SwiftUI
 
-struct BannerModel: Hashable {
-    let id = UUID().uuidString
-    let image: Image
+struct BannerModel: Hashable, Decodable {
+    let image: String
     
     static func == (lhs: BannerModel, rhs: BannerModel) -> Bool {
-        lhs.id == rhs.id
+        lhs.image == rhs.image
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+        hasher.combine(image)
     }
 }

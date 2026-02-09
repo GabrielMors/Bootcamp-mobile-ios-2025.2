@@ -19,12 +19,36 @@ struct PostView: View {
         
         HStack {
             
-            profile.personImage
-                .resizable()
-                .scaledToFill()
-                .frame(width: 32, height: 32)
-                .clipShape(.circle)
-                .padding(.trailing, 8)
+            AsyncImage(url: URL(string: profile.personImage)) { image in
+                image
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 32, height: 32)
+                    .clipShape(.circle)
+                    .padding(.trailing, 8)
+            } placeholder: {
+                ProgressView()
+                    .frame(width: 32, height: 32)
+            }
+
+            
+//            AsyncImage(url: URL(string: profile.personImage)) { phase in
+//                switch phase {
+//                case .empty:
+//                    EmptyView()
+//                case .success(let image):
+//                    image
+//                        .resizable()
+//                        .scaledToFill()
+//                        .frame(width: 32, height: 32)
+//                        .clipShape(.circle)
+//                        .padding(.trailing, 8)
+//                case .failure(let error):
+//                    EmptyView()
+//                @unknown default:
+//                    EmptyView()
+//                }
+//            }
             
             VStack(alignment: .leading, spacing: 2) {
                 HStack {
@@ -50,5 +74,5 @@ struct PostView: View {
 }
 
 #Preview {
-    PostView(profile: .init(banners: [], name: "joshua_l", city: "Tokyo, Japan", personImage: .woman3))
+    PostView(profile: .init(id: "", banners: [], name: "", city: "", personImage: ""))
 }

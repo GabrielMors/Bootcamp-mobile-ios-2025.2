@@ -38,35 +38,71 @@ class ICRealtimeDatabase {
     
     func favoriteToggle(isFavorite: Bool, model: ProfileModel) {
         
-        if let _ = Auth.auth().currentUser {
+        if let user = Auth.auth().currentUser {
             
             ref
-                .child("stories")
+                .child("favorites")
                 .child(model.id)
+                .child(user.uid)
                 .setValue([
                 "isFavorite": isFavorite,
-                "name": model.name,
-                "city": model.city
+                "email": user.email ?? "Unknown"
             ])
             
         }
         
     }
     
-    func getProfiles() async throws {
+    func getFavoritesProfiles(
+        ids: [String]
+    ) async throws -> [(id: String, isFavorite: Bool)] {
+        
+        var profiles: [(id: String, isFavorite: Bool)] = []
+        
+        if let user = Auth.auth().currentUser {
+            let snapshot = try await ref.child("favorites").getData()
+            
+            guard let value = snapshot.value as? [String: Any] else {
+                throw ProfilesError.emptySnapshot
+            }
+            
+            for id in ids {
+                guard let profile = value[id] as? [String: Any] else {
+                    continue
+                }
+                
+                guard let findedUser = profile[user.uid] as? [String: Any] else {
+                    continue
+                }
+                
+                guard let isFavorite = findedUser["isFavorite"] as? Bool else {
+                    continue
+                }
+                
+                profiles.append(
+                    (id, isFavorite)
+                )
+            }
+            
+        }
+        
+        return profiles
+    }
+    
+    func getProfiles() async throws -> [ProfileModel] {
        // if let _ = Auth.auth().currentUser {
         let snapshot = try await ref.child("profile").getData()
         
         guard let value = snapshot.value else {
-            return
+            throw ProfilesError.emptySnapshot
         }
         
         let data = try JSONSerialization.data(withJSONObject: value)
         
         let decoder = JSONDecoder()
-        let profiles = try decoder.decode([ProfileModelTest].self, from: data)
+        let profiles = try decoder.decode([ProfileModel].self, from: data)
         
-        print(profiles)
+        return profiles
             
        // }
     }
@@ -81,8 +117,13 @@ extension ICRealtimeDatabase {
     }
 }
 
-//(
-//{
+extension ICRealtimeDatabase {
+    enum ProfilesError: Error {
+        case emptySnapshot
+    }
+}
+
+// {
 //    banners =     (
 //                {
 //            image = "https://picsum.photos/id/1015/800/400";
@@ -98,26 +139,4 @@ extension ICRealtimeDatabase {
 //    id = "1b3f7a8c-9a11-4d01-9f4b-123456789001";
 //    name = "josei_l";
 //    personImage = "https://picsum.photos/id/1011/300/300";
-//},
-//{
-//    banners =     (
-//                {
-//            image = "https://picsum.photos/id/1050/800/400";
-//        },
-//                {
-//            image = "https://picsum.photos/id/1060/800/400";
-//        },
-//                {
-//            image = "https://picsum.photos/id/1070/800/400";
-//        },
-//                {
-//            image = "https://picsum.photos/id/1080/800/400";
-//        }
-//    );
-//    city = "Brazil, Sao Paulo";
-//    id = "2c4a8b9d-8b22-4e02-8a5c-123456789002";
-//    name = "anie_i";
-//    personImage = "https://picsum.photos/id/1041/300/300";
-//}
-//)
-//)
+// }
