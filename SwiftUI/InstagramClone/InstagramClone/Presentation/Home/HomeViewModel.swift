@@ -11,7 +11,7 @@ import SwiftUI
 
 class HomeViewModel: ObservableObject {
     
-    var items: Array<ProfileModel> = []
+    var profiles: Array<ProfileModel> = []
     
     @Published var bannerIndex: [CGFloat] = []
     @Published var profileIndex: [Int?] = []
@@ -35,20 +35,20 @@ class HomeViewModel: ObservableObject {
         
         Task {
             do {
-                items = try await ICRealtimeDatabase.shared.getProfiles()
+                profiles = try await DatabaseService.Profile.shared.getProfiles()
                 
-                let ids = items.compactMap { model in
+                let ids = profiles.compactMap { model in
                     model.id
                 }
                 
-                let findeds = try await ICRealtimeDatabase.shared.getFavoritesProfiles(ids: ids)
+                let findeds = try await DatabaseService.Favorite.shared.getFavoritesProfiles(ids: ids)
              
-                for i in 0..<items.count {
+                for i in 0..<profiles.count {
                     bannerIndex.append(0)
                     profileIndex.append(i)
                     
                     
-                    let currentItem = items[i]
+                    let currentItem = profiles[i]
                     
                     if let findedUser = findeds.first(where: { id, isFavorite in
                         currentItem.id == id

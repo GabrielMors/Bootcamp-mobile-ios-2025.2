@@ -21,7 +21,7 @@ struct BannerView: View {
     
     var body: some View {
             VStack(alignment: .leading) {
-                ForEach(Array(homeViewModel.items.enumerated()), id: \.element) { profileIndex, profile in
+                ForEach(Array(homeViewModel.profiles.enumerated()), id: \.element) { profileIndex, profile in
                     VStack(alignment: .leading) {
                         
                         PostView(profile: profile)

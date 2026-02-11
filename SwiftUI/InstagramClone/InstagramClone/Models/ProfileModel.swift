@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct ProfileModel: Hashable, Decodable {
+struct ProfileModel: Hashable, Codable {
     let id: String
     let banners: [BannerModel]
     let name: String
@@ -22,4 +22,10 @@ struct ProfileModel: Hashable, Decodable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
+    
+}
+
+struct SyncFavoriteModel: Hashable, Codable {
+    let isFavorite: Bool
+    let profileModel: ProfileModel
 }

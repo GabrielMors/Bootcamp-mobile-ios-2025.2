@@ -10,10 +10,12 @@
 		C710FF9B2F2820060053F6F0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C710FF9A2F2820060053F6F0 /* FirebaseAuth */; };
 		C710FF9D2F2820060053F6F0 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C710FF9C2F2820060053F6F0 /* FirebaseDatabase */; };
 		C710FF9F2F2820060053F6F0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C710FF9E2F2820060053F6F0 /* FirebaseFirestore */; };
+		C75278AA2F3D37DF00BCE39D /* Offile First.rtf in Resources */ = {isa = PBXBuildFile; fileRef = C75278A92F3D37DF00BCE39D /* Offile First.rtf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C70C7DBB2EE78403006C3453 /* InstagramClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C75278A92F3D37DF00BCE39D /* Offile First.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "Offile First.rtf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -54,6 +56,7 @@
 		C70C7DB22EE78403006C3453 = {
 			isa = PBXGroup;
 			children = (
+				C75278A92F3D37DF00BCE39D /* Offile First.rtf */,
 				C70C7DBD2EE78403006C3453 /* InstagramClone */,
 				C70C7DBC2EE78403006C3453 /* Products */,
 			);
@@ -137,6 +140,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C75278AA2F3D37DF00BCE39D /* Offile First.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

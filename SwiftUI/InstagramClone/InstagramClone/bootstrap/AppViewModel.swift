@@ -14,38 +14,26 @@ class AppViewModel: ObservableObject {
     
     @Published var uiState: UIState = .idle
     
-    private let myUserDefaults: MyUserDetauls
-    
-    private let service: AppServiceProtocol
+    private let authService: AuthServiceProtocol
     
     @Published var isLoading: Bool = false
     
     @Published private(set) var loginErrorMessage: String?
     
     init() {
-        myUserDefaults = MyUserDetauls()
-        self.service = AppService(myUserDefaults: myUserDefaults)
+        self.authService = AuthService()
     }
-    
-    //    func fetchData() {
-    //        uiState = .loading
-    //
-    //        Task {
-    //            await service.fetchData()
-    //            self.uiState = .auth
-    //        }
-    //    }
     
     func fetchData() {
         
-        service.fetchData { result in
+        authService.getCurrentUser { result in
             
             self.isLoading = false
             
             switch result {
             case .success(let model):
                 
-                if let _ = model {
+                if let model {
                     self.uiState = .auth
                     return
                 }
@@ -71,8 +59,17 @@ class AppViewModel: ObservableObject {
         ) { result, error in
             
             if self.showError(error) {
+                DatabaseService.Logs.shared.writeLog(
+                    logMessage: "Erro ao tentar fazer login, causa: \(String(describing: error))",
+                    ofType: .warning
+                )
                 return
             }
+            
+            DatabaseService.Logs.shared.writeLog(
+                logMessage: "O usuário \(email) acabou de fazer login",
+                ofType: .info
+            )
             
             self.fetchData()
             

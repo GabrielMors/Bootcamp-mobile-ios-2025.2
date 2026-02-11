@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct BannerModel: Hashable, Decodable {
+struct BannerModel: Hashable, Codable {
     let image: String
     
     static func == (lhs: BannerModel, rhs: BannerModel) -> Bool {
