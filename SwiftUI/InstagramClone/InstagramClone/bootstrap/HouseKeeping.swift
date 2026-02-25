@@ -13,7 +13,6 @@ class HouseKeeping {
         NetworkingMonitor { isSuccess in
             if isSuccess {
                 self.checkSyncs()
-                //DatabaseService.Favorite.shared.favoriteToggle(isFavorite: <#T##Bool#>, model: <#T##ProfileModel#>)
             }
         }
     }
@@ -24,27 +23,25 @@ class HouseKeeping {
     
     private func checkIsFavoriteToSync() {
         let defaults = UserDefaults.standard
-        
-        let favoritesData = defaults.value(forKey: PendingOperationType.favorites.rawValue) as? Data
        
-        guard let favoritesData else {
+        guard let favoritesDatas = defaults.value(forKey: ICConstants.Keys.pendingOperation) as? [Data] else {
             return
         }
         
-        do {
-            
-            let decoder = JSONDecoder()
-            let pendingOperation = try decoder.decode(PendingOperation<SyncFavoriteModel>.self, from: favoritesData)
+        let decoder = JSONDecoder()
+       
+        for favoritesData in favoritesDatas {
+            guard let pendingOperation = try? decoder.decode(PendingOperation<SyncFavoriteModel>.self, from: favoritesData) else {
+                continue
+            }
             
             DatabaseService.Favorite.shared.favoriteToggle(
                 isFavorite: pendingOperation.model.isFavorite,
                 model: pendingOperation.model.profileModel
             )
-            
-        } catch {
-            print("ERRORRR", error)
         }
         
+        defaults.removeObject(forKey: ICConstants.Keys.pendingOperation)
         
     }
     

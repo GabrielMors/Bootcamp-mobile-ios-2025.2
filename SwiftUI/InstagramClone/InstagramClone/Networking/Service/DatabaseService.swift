@@ -66,7 +66,9 @@ extension DatabaseService {
                 
                 Task {
                     do {
-                      
+                        
+                        //throw ConnectionErrorTest.noInternet
+                        
                         try await ref
                             .child(favoritesKey.rawValue)
                             .child(id)
@@ -78,42 +80,56 @@ extension DatabaseService {
                         
                         
                     } catch {
-                        // nesse ponto, primeiro verifico se o erro é do tipo sem conex
-                        
                         if let _ = error as? ConnectionErrorTest {
-                            print("nao foi possivel favoritar em BG, vai ser enviado assim q a internet voltar")
-                            
-                            let defaults = UserDefaults.standard
-                            
-                            let favoriteModel = SyncFavoriteModel(isFavorite: isFavorite, profileModel: model)
-                            
-                            let pendingOperation = PendingOperation(type: favoritesKey, model: favoriteModel)
-                            
-                            let encode = JSONEncoder()
-                            guard let data = try? encode.encode(pendingOperation) else {
-                                print("Deu B.O precisa ver como resolver")
-                                return
-                            }
-                            
-                            print("Dados salvos para sync posterior", model, isFavorite)
-                            defaults.set(data, forKey: favoritesKey.rawValue)
-                            
+                            syncLaterFavorites(isFavorite: isFavorite, model: model)
                             return
                         }
-                        
-//                        let nsError = error as NSError
-//                        
-//                        // analogia sem conex
-//                        if nsError.code == AuthErrorCode.networkError.rawValue {
-//                            return
-//                        }
-                        
-                        // tratar outros tipos de erro
                     }
                 }
- 
+                
             }
             
+        }
+        
+        private func syncLaterFavorites(isFavorite: Bool, model: ProfileModel) {
+            print("nao foi possivel favoritar em BG, vai ser enviado assim q a internet voltar")
+            
+            let defaults = UserDefaults.standard
+            
+            let favoriteModel = SyncFavoriteModel(isFavorite: isFavorite, profileModel: model)
+            
+            let pendingOperation = PendingOperation(type: PendingOperationType.favorites, model: favoriteModel)
+            
+            let encode = JSONEncoder()
+            guard let data = try? encode.encode(pendingOperation) else {
+                print("Deu B.O precisa ver como resolver")
+                return
+            }
+            
+            let currentPendingOperationsData = defaults.object(forKey: ICConstants.Keys.pendingOperation) as? [Data] ?? []
+            
+            var currentPendingOperationsDataAccumulator = [Data]()
+            
+            // Caso 1 - ja tem esse profile salvo
+            
+            for currentPendingOperationDataItem in currentPendingOperationsData {
+                guard let currentPendingOperationModel = try? JSONDecoder()
+                    .decode(
+                        PendingOperation<SyncFavoriteModel>.self,
+                        from: currentPendingOperationDataItem
+                    ),
+                      currentPendingOperationModel.model.profileModel.id != model.id
+                else {
+                    continue
+                }
+                
+                currentPendingOperationsDataAccumulator.append(currentPendingOperationDataItem)
+            }
+            
+            currentPendingOperationsDataAccumulator.append(data)
+            
+            // print("Dados salvos para sync posterior", model, isFavorite)
+            defaults.set(currentPendingOperationsDataAccumulator, forKey: ICConstants.Keys.pendingOperation)
         }
         
         func getFavoritesProfiles(

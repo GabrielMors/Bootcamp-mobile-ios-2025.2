@@ -14,4 +14,8 @@ class ICConstants {
         static let inputHeight: CGFloat = 50
     }
     
+    class Keys {
+        static let pendingOperation = "pendingOperation"
+    }
+    
 }

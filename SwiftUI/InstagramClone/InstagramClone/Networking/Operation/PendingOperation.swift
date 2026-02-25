@@ -8,7 +8,7 @@
 import Foundation
 
 struct PendingOperation<Model: Codable>: Codable {
-    let id = UUID().uuidString
+    var id = UUID().uuidString
     let type: PendingOperationType
     let model: Model
 }

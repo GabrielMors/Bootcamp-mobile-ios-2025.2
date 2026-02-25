@@ -7,65 +7,60 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C710FF9B2F2820060053F6F0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C710FF9A2F2820060053F6F0 /* FirebaseAuth */; };
-		C710FF9D2F2820060053F6F0 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C710FF9C2F2820060053F6F0 /* FirebaseDatabase */; };
-		C710FF9F2F2820060053F6F0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C710FF9E2F2820060053F6F0 /* FirebaseFirestore */; };
-		C75278AA2F3D37DF00BCE39D /* Offile First.rtf in Resources */ = {isa = PBXBuildFile; fileRef = C75278A92F3D37DF00BCE39D /* Offile First.rtf */; };
+		C71A92ED2F47CE6900BECFE9 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = C71A92EC2F47CE6900BECFE9 /* FirebaseCore */; };
+		C71A92EF2F47CE6900BECFE9 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C71A92EE2F47CE6900BECFE9 /* FirebaseMessaging */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C70C7DBB2EE78403006C3453 /* InstagramClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C75278A92F3D37DF00BCE39D /* Offile First.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "Offile First.rtf"; sourceTree = "<group>"; };
+		C7C904AF2F4671BA00FEDC20 /* MyNotifications.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyNotifications.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		C710FFEE2F2828490053F6F0 /* Exceptions for "InstagramClone" folder in "InstagramClone" target */ = {
+		C71A92F12F47D63E00BECFE9 /* Exceptions for "MyNotifications" folder in "MyNotifications" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = C70C7DBA2EE78403006C3453 /* InstagramClone */;
+			target = C7C904AE2F4671BA00FEDC20 /* MyNotifications */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		C70C7DBD2EE78403006C3453 /* InstagramClone */ = {
+		C7C904B12F4671BA00FEDC20 /* MyNotifications */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				C710FFEE2F2828490053F6F0 /* Exceptions for "InstagramClone" folder in "InstagramClone" target */,
+				C71A92F12F47D63E00BECFE9 /* Exceptions for "MyNotifications" folder in "MyNotifications" target */,
 			);
-			path = InstagramClone;
+			path = MyNotifications;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C70C7DB82EE78403006C3453 /* Frameworks */ = {
+		C7C904AC2F4671BA00FEDC20 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C710FF9D2F2820060053F6F0 /* FirebaseDatabase in Frameworks */,
-				C710FF9B2F2820060053F6F0 /* FirebaseAuth in Frameworks */,
-				C710FF9F2F2820060053F6F0 /* FirebaseFirestore in Frameworks */,
+				C71A92EF2F47CE6900BECFE9 /* FirebaseMessaging in Frameworks */,
+				C71A92ED2F47CE6900BECFE9 /* FirebaseCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C70C7DB22EE78403006C3453 = {
+		C7C904A62F4671BA00FEDC20 = {
 			isa = PBXGroup;
 			children = (
-				C75278A92F3D37DF00BCE39D /* Offile First.rtf */,
-				C70C7DBD2EE78403006C3453 /* InstagramClone */,
-				C70C7DBC2EE78403006C3453 /* Products */,
+				C7C904B12F4671BA00FEDC20 /* MyNotifications */,
+				C7C904B02F4671BA00FEDC20 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		C70C7DBC2EE78403006C3453 /* Products */ = {
+		C7C904B02F4671BA00FEDC20 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C70C7DBB2EE78403006C3453 /* InstagramClone.app */,
+				C7C904AF2F4671BA00FEDC20 /* MyNotifications.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,81 +68,79 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C70C7DBA2EE78403006C3453 /* InstagramClone */ = {
+		C7C904AE2F4671BA00FEDC20 /* MyNotifications */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C70C7DC62EE78405006C3453 /* Build configuration list for PBXNativeTarget "InstagramClone" */;
+			buildConfigurationList = C7C904BA2F4671BC00FEDC20 /* Build configuration list for PBXNativeTarget "MyNotifications" */;
 			buildPhases = (
-				C70C7DB72EE78403006C3453 /* Sources */,
-				C70C7DB82EE78403006C3453 /* Frameworks */,
-				C70C7DB92EE78403006C3453 /* Resources */,
+				C7C904AB2F4671BA00FEDC20 /* Sources */,
+				C7C904AC2F4671BA00FEDC20 /* Frameworks */,
+				C7C904AD2F4671BA00FEDC20 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				C70C7DBD2EE78403006C3453 /* InstagramClone */,
+				C7C904B12F4671BA00FEDC20 /* MyNotifications */,
 			);
-			name = InstagramClone;
+			name = MyNotifications;
 			packageProductDependencies = (
-				C710FF9A2F2820060053F6F0 /* FirebaseAuth */,
-				C710FF9C2F2820060053F6F0 /* FirebaseDatabase */,
-				C710FF9E2F2820060053F6F0 /* FirebaseFirestore */,
+				C71A92EC2F47CE6900BECFE9 /* FirebaseCore */,
+				C71A92EE2F47CE6900BECFE9 /* FirebaseMessaging */,
 			);
-			productName = InstagramClone;
-			productReference = C70C7DBB2EE78403006C3453 /* InstagramClone.app */;
+			productName = MyNotifications;
+			productReference = C7C904AF2F4671BA00FEDC20 /* MyNotifications.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		C70C7DB32EE78403006C3453 /* Project object */ = {
+		C7C904A72F4671BA00FEDC20 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
-					C70C7DBA2EE78403006C3453 = {
+					C7C904AE2F4671BA00FEDC20 = {
 						CreatedOnToolsVersion = 26.0.1;
 					};
 				};
 			};
-			buildConfigurationList = C70C7DB62EE78403006C3453 /* Build configuration list for PBXProject "InstagramClone" */;
+			buildConfigurationList = C7C904AA2F4671BA00FEDC20 /* Build configuration list for PBXProject "MyNotifications" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = C70C7DB22EE78403006C3453;
+			mainGroup = C7C904A62F4671BA00FEDC20;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				C710FF992F2820060053F6F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C71A92EB2F47CE6900BECFE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = C70C7DBC2EE78403006C3453 /* Products */;
+			productRefGroup = C7C904B02F4671BA00FEDC20 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C70C7DBA2EE78403006C3453 /* InstagramClone */,
+				C7C904AE2F4671BA00FEDC20 /* MyNotifications */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		C70C7DB92EE78403006C3453 /* Resources */ = {
+		C7C904AD2F4671BA00FEDC20 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C75278AA2F3D37DF00BCE39D /* Offile First.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		C70C7DB72EE78403006C3453 /* Sources */ = {
+		C7C904AB2F4671BA00FEDC20 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -157,7 +150,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		C70C7DC42EE78405006C3453 /* Debug */ = {
+		C7C904B82F4671BC00FEDC20 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -221,7 +214,7 @@
 			};
 			name = Debug;
 		};
-		C70C7DC52EE78405006C3453 /* Release */ = {
+		C7C904B92F4671BC00FEDC20 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -278,28 +271,31 @@
 			};
 			name = Release;
 		};
-		C70C7DC72EE78405006C3453 /* Debug */ = {
+		C7C904BB2F4671BC00FEDC20 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyNotifications/MyNotifications.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = D38F29JV6F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = InstagramClone/Info.plist;
+				INFOPLIST_FILE = MyNotifications/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "My Notifications";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.InstagramClone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ziminny.MyNotifications;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -315,28 +311,31 @@
 			};
 			name = Debug;
 		};
-		C70C7DC82EE78405006C3453 /* Release */ = {
+		C7C904BC2F4671BC00FEDC20 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyNotifications/MyNotifications.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = D38F29JV6F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = InstagramClone/Info.plist;
+				INFOPLIST_FILE = MyNotifications/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "My Notifications";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.InstagramClone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ziminny.MyNotifications;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -355,20 +354,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C70C7DB62EE78403006C3453 /* Build configuration list for PBXProject "InstagramClone" */ = {
+		C7C904AA2F4671BA00FEDC20 /* Build configuration list for PBXProject "MyNotifications" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C70C7DC42EE78405006C3453 /* Debug */,
-				C70C7DC52EE78405006C3453 /* Release */,
+				C7C904B82F4671BC00FEDC20 /* Debug */,
+				C7C904B92F4671BC00FEDC20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C70C7DC62EE78405006C3453 /* Build configuration list for PBXNativeTarget "InstagramClone" */ = {
+		C7C904BA2F4671BC00FEDC20 /* Build configuration list for PBXNativeTarget "MyNotifications" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C70C7DC72EE78405006C3453 /* Debug */,
-				C70C7DC82EE78405006C3453 /* Release */,
+				C7C904BB2F4671BC00FEDC20 /* Debug */,
+				C7C904BC2F4671BC00FEDC20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -376,33 +375,28 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C710FF992F2820060053F6F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		C71A92EB2F47CE6900BECFE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 12.8.0;
+				minimumVersion = 12.9.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C710FF9A2F2820060053F6F0 /* FirebaseAuth */ = {
+		C71A92EC2F47CE6900BECFE9 /* FirebaseCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C710FF992F2820060053F6F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
+			package = C71A92EB2F47CE6900BECFE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
 		};
-		C710FF9C2F2820060053F6F0 /* FirebaseDatabase */ = {
+		C71A92EE2F47CE6900BECFE9 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C710FF992F2820060053F6F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseDatabase;
-		};
-		C710FF9E2F2820060053F6F0 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C710FF992F2820060053F6F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
+			package = C71A92EB2F47CE6900BECFE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = C70C7DB32EE78403006C3453 /* Project object */;
+	rootObject = C7C904A72F4671BA00FEDC20 /* Project object */;
 }
