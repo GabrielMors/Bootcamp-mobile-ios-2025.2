@@ -193,6 +193,7 @@ func medirTempo(_ target: String, _ bloco: () -> Void) {
 medirTempo("SET") {
     _ = set.contains(elementoBuscado)
 }
+
 DispatchQueue.main.asyncAfter(wallDeadline: .now() + .seconds(2)) {
     // Medindo tempo do Array
     medirTempo("ARRAY") {
